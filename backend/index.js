@@ -54,6 +54,20 @@ app.get('/books',async (req, res)=>{
     }
 })
 
+// Route for Get All the Books from database by id
+app.get('/books/:id',async (req, res)=>{
+    try {
+
+        const {id} = req.params;
+
+        const book = await Book.findById(id);
+        return res.status(200).json(book);
+    }catch (e) {
+        console.log(e.message);
+        res.status(500).send({message:e.message});
+    }
+})
+
 mongoose
     .connect(MONGO_URL)
     .then(()=>{
