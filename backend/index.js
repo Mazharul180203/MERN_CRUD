@@ -19,6 +19,7 @@ app.use(express.json());
 //Route for Save a new Book
 app.post('/books',async (req, res)=>{
     try{
+        // validation
         if(!req.body.title || !req.body.author || !req.body.publishYear){
             return res.status(400).send({
                 message: 'Send All required fields'
@@ -67,6 +68,52 @@ app.get('/books/:id',async (req, res)=>{
         res.status(500).send({message:e.message});
     }
 })
+
+
+//Route for Update a Book
+
+app.put('/books/:id',async (req, res)=>{
+    try{
+        if(!req.body.title || !req.body.author || !req.body.publishYear){
+            return res.status(400).send({
+                message: 'Send All required fields'
+            })
+        }
+
+        const {id} = req.params;
+
+        const result = await Book.findByIdAndUpdate(id,req.body);
+        if(!result){
+            return res.status(404).json({message:"Book is not Found"});
+        }else{
+            return res.status(200).json({message:"Book updated successfully"});
+        }
+
+    }catch (e) {
+        console.log(e.message);
+        res.status(500).send({message:e.message});
+    }
+})
+
+
+//Route for Deleting a Book
+
+app.delete('/books/:id',async (req,res)=>{
+    try{
+
+        const {id} = req.params;
+        const result = await Book.findByIdAndDelete(id);
+        if(!result){
+            return res.status(404).json({message:"Book is not Found"});
+        }else{
+            return res.status(200).json({message:"Book delete successfully"});
+        }
+    }catch (e) {
+        console.log(e.message);
+        res.status(500).send({message:e.message});
+    }
+})
+
 
 mongoose
     .connect(MONGO_URL)
