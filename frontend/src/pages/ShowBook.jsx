@@ -30,11 +30,29 @@ const ShowBook = () => {
                 loading? (
                     <Spinner/>
                 ):(
-                    <div>
-                        {book._id}<br/>
-                        {book.title}<br/>
-                        {book.author}<br/>
-                        {book.publishYear}
+                    <div className="container">
+                        <div className="row">
+                            <div className="col">
+                              <table className="table table-responsive">
+                                  <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Publish Year</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                        <td>{book._id}</td>
+                                        <td>{book.title}</td>
+                                        <td>{book.author}</td>
+                                        <td>{book.publishYear}</td>
+                                    </tr>
+                                  </tbody>
+                              </table>
+                            </div>
+                        </div>
                     </div>
                 )
             }

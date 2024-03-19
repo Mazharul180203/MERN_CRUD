@@ -41,10 +41,10 @@ const Home = () => {
 
   return (
     <div className="p-4">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl my-8">Book List</h1>
+      <div>
+        <h1>Book List</h1>
         <Link to="/books/create">
-          <MdOutlineAddBox className="text-sky-800 text-4xl" />
+          <MdOutlineAddBox/>
         </Link>
         <div>
           {loading ? (
@@ -53,51 +53,39 @@ const Home = () => {
             <table className="w-full broder-separate border-spacing-2">
               <thead>
                 <tr>
-                  <th className="border border-slate-600 rounded-md">No</th>
-                  <th className="border border-slate-600 rounded-md">Title</th>
-                  <th className="border border-slate-600 rounded-md mx-md:hidden">
-                    Author
-                  </th>
-                  <th className="border border-slate-600 rounded-md mx-md:hidden">
-                    Publish Year
-                  </th>
-                  <th className="border border-slate-600 rounded-md">
-                    Operations
-                  </th>
+                  <th>No</th>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Publish Year</th>
+                  <th>Operations</th>
                 </tr>
               </thead>
               <tbody>
-                {books.map((item, i) => {
-                  return (
-                    <tr key={item._id} className="h-8">
-                      <td className="border border-slate-700 rounded-md text-center">
-                        {i + 1}
-                      </td>
-                      <td className="border border-slate-700 rounded-md text-center">
-                        {item.title}
-                      </td>
-                      <td className="border border-slate-700 rounded-md text-center mx-md:hidden">
-                        {item.author}
-                      </td>
-                      <td className="border border-slate-700 rounded-md text-center mx-md:hidden">
-                        {item.publishYear}
-                      </td>
-                      <td className="border border-slate-700 rounded-md text-center">
-                        <div className="flex justify-center gap-x-4">
-                          <Link to={`/books/details/${item._id}`}>
-                            <BsInfoCircle className="text-2xl text-green-800" />
-                          </Link>
-                          <Link to={`/books/edit/${item._id}`}>
-                            <AiOutlineEdit className="text-2xl text-yellow-800" />
-                          </Link>
-                          <button onClick={() => handleDelete(item._id)}>
-                            <MdOutlineDelete className="text-2xl text-red-800" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
+                {
+                    books.map((item, i) => {
+                      return (
+                          <tr key={item._id} className="h-8">
+                              <td>{i + 1}</td>
+                              <td>{item.title}</td>
+                              <td>{item.author}</td>
+                              <td>{item.publishYear}</td>
+                              <td>
+                                  <div className="flex gap-x-4">
+                                      <Link to={`/books/details/${item._id}`}>
+                                          <BsInfoCircle className="text-2xl text-green-800" />
+                                      </Link>
+                                      <Link to={`/books/edit/${item._id}`}>
+                                          <AiOutlineEdit className="text-2xl text-yellow-800" />
+                                      </Link>
+                                      <button onClick={() => handleDelete(item._id)}>
+                                          <MdOutlineDelete className="text-2xl text-red-800" />
+                                      </button>
+                                  </div>
+                              </td>
+                          </tr>
+                      );
+                    }
+                )}
               </tbody>
             </table>
           )}
@@ -108,3 +96,4 @@ const Home = () => {
 };
 
 export default Home;
+
