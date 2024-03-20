@@ -9,12 +9,15 @@ import './assets/CSS/dropdownmenu.css'
 import './assets/CSS/animate.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter} from "react-router-dom";
+import SideNavLayout from "./layout/SideNavLayout.jsx";
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-        <App />
+        <SideNavLayout>
+            <App />
+        </SideNavLayout>
     </BrowserRouter>
   </React.StrictMode>,
 )

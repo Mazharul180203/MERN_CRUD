@@ -24,7 +24,7 @@ const CreateBook = () => {
         const res = await axios.post(`http://localhost:5555/books`, formData);
         if (res) {
           setLoading(false);
-          navigate('/')
+          navigate('/bokolist')
         }
       } catch (e) {
         setLoading(false);

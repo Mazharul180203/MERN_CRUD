@@ -7,7 +7,7 @@
   display: none;
 }
 body {
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTQ0MSIgaGVpZ2h0PSI4MTEiIHZpZXdCb3g9IjAgMCAxNDQxIDgxMSI+DQogIDxkZWZzPg0KICAgIDxjbGlwUGF0aCBpZD0iY2xpcC1ib2R5Ij4NCiAgICAgIDxyZWN0IHdpZHRoPSIxNDQxIiBoZWlnaHQ9IjgxMSIvPg0KICAgIDwvY2xpcFBhdGg+DQogIDwvZGVmcz4NCiAgPGcgaWQ9ImJvZHkiIGNsaXAtcGF0aD0idXJsKCNjbGlwLWJvZHkpIj4NCiAgICA8cmVjdCB3aWR0aD0iMTQ0MSIgaGVpZ2h0PSI4MTEiIGZpbGw9IiNmNmYzZmUiLz4NCiAgICA8ZyBpZD0iR3JvdXBfMTAzNyIgZGF0YS1uYW1lPSJHcm91cCAxMDM3IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjguODI1IC0xODcwLjYwNCkiIG9wYWNpdHk9IjAuMjciPg0KICAgICAgPHBhdGggaWQ9IlBhdGhfMzU0IiBkYXRhLW5hbWU9IlBhdGggMzU0IiBkPSJNMTg2Ny45NjQsMjg4Ny4xYzAsMzcwLjMtMzAxLjE5NCw2NzEuMS02NzMuNDgyLDY3MS4xUzUyMSwzMjU3LjQwNiw1MjEsMjg4Ny4xLDgyMi4xOTEsMjIxNiwxMTk0LjQ4MiwyMjE2LDE4NjcuOTY0LDI1MTYuOCwxODY3Ljk2NCwyODg3LjFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4Ni4wMzUpIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmRmZGIiIHN0cm9rZS13aWR0aD0iMjAwIi8+DQogICAgICA8ZyBpZD0iR3JvdXBfOTE0IiBkYXRhLW5hbWU9Ikdyb3VwIDkxNCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjUuNDE4IDI5OTAuMzU1KSI+DQogICAgICAgIDxwYXRoIGlkPSJQYXRoXzM1NSIgZGF0YS1uYW1lPSJQYXRoIDM1NSIgZD0iTTY1LjQxOCwyODk4LjgxOWE4OS42Nyw4OS42NywwLDAsMCwxMjIuNTg4LTMxLjQ2OSw4OS42NTEsODkuNjUxLDAsMCwwLDMxLjUyNywxMjIuODA4LDg5LjY2OSw4OS42NjksMCwwLDAtMTIyLjU4OCwzMS40NjlBODkuNjQ5LDg5LjY0OSwwLDAsMCw2NS40MTgsMjg5OC44MTlaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNjUuNDE4IC0yODY3LjM1KSIgZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIi8+DQogICAgICA8L2c+DQogICAgPC9nPg0KICA8L2c+DQo8L3N2Zz4NCg==');
+  background-image: url('https://coolbackgrounds.io/images/backgrounds/white/white-radial-gradient-a5802da1.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
 
@@ -114,3 +114,20 @@ table.rounded td {
 table.rounded tr:hover td,table.rounded tr:hover th{
   background-color: #e8e8e8;
 }
+buttonn {
+  color: #090909;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #e8e8e8;
+  cursor: pointer;
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+
+buttonn:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
+
