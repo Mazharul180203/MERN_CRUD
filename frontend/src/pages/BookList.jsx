@@ -5,6 +5,7 @@ import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Spinner from "../component/Spinner.jsx";
+import SideNavLayout from "../layout/SideNavLayout.jsx";
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -40,7 +41,8 @@ const BookList = () => {
   }
 
   return (
-    <div className="p-4">
+      <SideNavLayout>
+          <div className="p-4">
       <div>
         <h1 className="flex justify-content-center mb-4">Book List</h1>
         <Link to="/books/create">
@@ -92,6 +94,7 @@ const BookList = () => {
         </div>
       </div>
     </div>
+      </SideNavLayout>
   );
 };
 

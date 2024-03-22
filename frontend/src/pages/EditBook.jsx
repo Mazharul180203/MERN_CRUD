@@ -3,6 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import BackButton from "../component/BackButton.jsx";
 import Spinner from "../component/Spinner.jsx";
 import axios from "axios";
+import SideNavLayout from "../layout/SideNavLayout.jsx";
 
 const EditBook = () => {
     const navigate = useNavigate();
@@ -34,7 +35,8 @@ const EditBook = () => {
     }
 
     return (
-        <div className="p-4">
+        <SideNavLayout>
+            <div className="p-4">
             <BackButton />
             <h1 className="text-3xl my-4">Edit Book</h1>
             {loading ? <Spinner /> : ""}
@@ -72,6 +74,7 @@ const EditBook = () => {
                 <button type="submit">Submit</button>
             </form>
         </div>
+        </SideNavLayout>
     );
 };
 

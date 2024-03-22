@@ -3,6 +3,7 @@ import BackButton from "../component/BackButton.jsx";
 import Spinner from "../component/Spinner.jsx";
 import {useParams} from "react-router-dom";
 import axios from "axios";
+import SideNavLayout from "../layout/SideNavLayout.jsx";
 const ShowBook = () => {
     const [book,setBook] = useState({});
     const [loading,setLoading] = useState(false);
@@ -24,7 +25,8 @@ const ShowBook = () => {
         fetchData();
     }, []);
     return (
-        <div className='p-4'>
+        <SideNavLayout>
+            <div className='p-4'>
             <h1 className='text-3xl my-4' >Show Book</h1>
             {
                 loading? (
@@ -57,6 +59,7 @@ const ShowBook = () => {
                 )
             }
         </div>
+        </SideNavLayout>
     );
 };
 

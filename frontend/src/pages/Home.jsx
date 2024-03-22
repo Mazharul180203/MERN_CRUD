@@ -2,7 +2,9 @@ import SideNavLayout from "../layout/SideNavLayout.jsx";
 
 const Home = ()=>{
     return(
-        <h1>Home Page</h1>
+        <SideNavLayout>
+            <h1>dfgdfg</h1>
+        </SideNavLayout>
     )
 }
 export default Home;
