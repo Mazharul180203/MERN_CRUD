@@ -2,12 +2,16 @@ import express from "express";
 import { PORT, MONGO_URL } from "./config.js";
 import mongoose from "mongoose";
 import booksRoute from "./routes/bookRoutes.js";
+import auth from "./routes/authRoutes.js"
 import cors from "cors";
+import morgan from 'morgan'
 
 const app = express();
 
 // Middleware for parsing request body
 app.use(express.json());
+app.use(morgan('tiny'));
+app.disable('x-powered-by'); // less hackers know about out stack
 
 //Middleware can handle CORS policy
 //Option 1: Allow all the origins with default of cors(*)
@@ -27,6 +31,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/books", booksRoute);
+app.use("/auth",auth);
 
 mongoose
   .connect(MONGO_URL)
