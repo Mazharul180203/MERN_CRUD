@@ -13,19 +13,7 @@ app.use(express.json());
 app.use(morgan('tiny'));
 app.disable('x-powered-by'); // less hackers know about out stack
 
-//Middleware can handle CORS policy
-//Option 1: Allow all the origins with default of cors(*)
-
 app.use(cors());
-//Option 2: Allow custom origins with default of cors(*)
-// app.use(
-//   cors({
-//       origin: "",
-//       methods: ["GET", "POST", "PUT", "DELETE"],
-//       allowedHeaders:['Content-Type'],
-//   }),
-// );
-
 app.get("/", (req, res) => {
   return res.send("welcome saurav");
 });

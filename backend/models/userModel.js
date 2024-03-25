@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 export const UserSchema = new mongoose.Schema({
     username : {
         type : String,
@@ -24,4 +23,4 @@ export const UserSchema = new mongoose.Schema({
     profile : {type: String}
 
 });
-export const user =mongoose.model('User', UserSchema);
+export const userModel =mongoose.model('User', UserSchema);
