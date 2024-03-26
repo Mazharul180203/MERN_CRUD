@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 
 import * as controller from '../controllers/appController.js'
+import Auth from '../middleware/auth.js'
 
 
 //POST Method
@@ -22,7 +23,7 @@ router.route('/creatResetSession').get(controller.createResetSession);
 
 //PUT Method
 
-router.route('/updateUser').put(controller.updateUser)
+router.route('/updateUser').put(Auth,controller.updateUser)
 router.route('/resetPassword').put(controller.resetPassword)
 
 

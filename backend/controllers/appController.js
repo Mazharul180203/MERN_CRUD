@@ -1,7 +1,7 @@
 import {userModel} from "../models/userModel.js";
 import bcrypt from 'bcrypt';
-import jwt from "jsonwebtoken";
-import {JWT_SECRET} from "../config.js"
+import {EncodeToken} from "../utility/tokenUtility.js";
+
 
 
 
@@ -83,10 +83,7 @@ export async function login(req, res) {
 
                 // create jwt token
 
-                const token = jwt.sign({
-                  usrId : user._id,
-                  username: user.username
-                },'JWT_SECRET',{expiresIn: "24h"});
+                const token = EncodeToken(user._id,user.username);
 
                 return res.status(200).send({
                   msg: "Login successful...",
