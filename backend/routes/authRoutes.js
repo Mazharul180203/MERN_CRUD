@@ -5,10 +5,13 @@ import * as controller from '../controllers/appController.js'
 
 
 //POST Method
+
+
 router.route('/register').post(controller.register)
-//router.route('/registerMail').post()
+router.route('/login').post(controller.verifyUser,controller.login);
 router.route('/authenticate').post((req, res) => res.end());
-router.route('/login').post(controller.login);
+
+
 
 //GET Method
 router.route('/user/:username').get(controller.getUser)
