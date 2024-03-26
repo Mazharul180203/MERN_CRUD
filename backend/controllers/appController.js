@@ -106,12 +106,59 @@ export async function login(req, res) {
   }
 }
 export async function getUser(req, res) {
+  const { username } = req.params;
+  // Ensure username is provided
+  if (!username) {
+    return res.status(400).send({ error: "Invalid Username" });
+  }
+  try {
+    const user = await userModel.findOne({ username }).exec(); // Use .exec() for proper promise handling
 
-  
+    if (!user) {
+      // User not found
+      return res.status(404).send({ error: "Couldn't find the user" });
+    }
+     const {password , ...rest} = user.toJSON();//which valu is not pass to the api
+    // User found, return it
+    return res.status(200).send(rest);
+  } catch (e) {
+    // Log the error or handle it as per your logging strategy
+    console.error("Error fetching user data:", e);
+    return res.status(500).send({ error: "Cannot find user data due to an internal error" });
+  }
 }
+
 export async function updateUser(req, res) {
-  res.json("dfdfd");
+  try {
+    const id = req.query.id;
+    const body = req.body;
+
+    // Check if the ID and update body are provided
+    if (!id || Object.keys(body).length === 0) {
+      return res.status(400).send({ error: "Invalid request" });
+    }
+
+    // Attempt to update the user
+    const updateResult = await userModel.updateOne({ _id: id }, body);
+
+    // Check if the update operation modified any document
+    if (updateResult.matchedCount === 0) {
+      return res.status(404).send({ error: "User not found" });
+    }
+
+    // If document is found and update is applied
+    if (updateResult.modifiedCount > 0) {
+      return res.status(200).send({ msg: "Record Updated...!" });
+    } else {
+      // Document found but no update made (data might be the same)
+      return res.status(200).send({ msg: "No changes made to the record." });
+    }
+  } catch (e) {
+    // Catch and return any errors during the process
+    return res.status(500).send({ error: e.message });
+  }
 }
+
 export async function generateOTP(req, res) {
   res.json("dfdfd");
 }
