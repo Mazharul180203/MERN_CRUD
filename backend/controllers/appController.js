@@ -1,8 +1,7 @@
 import {userModel} from "../models/userModel.js";
 import bcrypt from 'bcrypt';
 import {EncodeToken} from "../utility/tokenUtility.js";
-
-
+import otpGenerator from "otp-generator";
 
 
 //middleware for verify user
@@ -73,35 +72,29 @@ export async function register(req, res) {
 
 export async function login(req, res) {
   const { username, password } = req.body;
-
   try {
-    userModel.findOne({ username })
-        .then(user=>{
-          bcrypt.compare(password, user.password)
-              .then(passwordCheck =>{
-                if(!passwordCheck) return res.status({ error: "Don't have password"})
+    const user = await userModel.findOne({ username });
+    if (!user) {
+      return res.status(404).send({ error: "Username not found" });
+    }
+    const passwordCheck = await bcrypt.compare(password, user.password);
+    if (!passwordCheck) {
+      return res.status(400).send({ error: "Incorrect password" });
+    }
+    const token = EncodeToken(user._id, user.username);
 
-                // create jwt token
-
-                const token = EncodeToken(user._id,user.username);
-
-                return res.status(200).send({
-                  msg: "Login successful...",
-                  username:user.username,
-                  token
-                })
-
-              })
-              .catch(error =>{
-                return res.status(400).send({ error : "Password does not match"})
-              })
-        })
-
-
-  }catch (error) {
-    return res.status(404).send({error: "UserName not Found"});
+    // Send the response
+    return res.status(200).send({
+      msg: "Login successful...",
+      username: user.username,
+      token,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({ error: "An error occurred during the login process" });
   }
 }
+
 export async function getUser(req, res) {
   const { username } = req.params;
   // Ensure username is provided
@@ -127,37 +120,30 @@ export async function getUser(req, res) {
 
 export async function updateUser(req, res) {
   try {
-    const id = req.query.id;
-    const body = req.body;
 
-    // Check if the ID and update body are provided
-    if (!id || Object.keys(body).length === 0) {
+    const userID = req.headers.userID;
+    const body = req.body;
+    if (!userID || Object.keys(body).length === 0) {
       return res.status(400).send({ error: "Invalid request" });
     }
+    const updateResult = await userModel.updateOne({ _id: userID }, body);
 
-    // Attempt to update the user
-    const updateResult = await userModel.updateOne({ _id: id }, body);
-
-    // Check if the update operation modified any document
     if (updateResult.matchedCount === 0) {
       return res.status(404).send({ error: "User not found" });
     }
 
-    // If document is found and update is applied
     if (updateResult.modifiedCount > 0) {
       return res.status(200).send({ msg: "Record Updated...!" });
     } else {
-      // Document found but no update made (data might be the same)
       return res.status(200).send({ msg: "No changes made to the record." });
     }
   } catch (e) {
-    // Catch and return any errors during the process
-    return res.status(500).send({ error: e.message });
+    return res.status(500).send({error: e.message });
   }
 }
 
 export async function generateOTP(req, res) {
-  res.json("dfdfd");
+    //otpGenerator.generate(6)
 }
 export async function verifyOTP(req, res) {
   res.json("dfdfd");

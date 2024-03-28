@@ -13,7 +13,7 @@ export default (req, res, next) => {
         let userName = decoded['userName'];
         req.headers.userID = userID;
         req.headers.userName = userName;
-        res.json(decoded);
-        //next();
+        //res.json(decoded);
+        next();
     }
 };
