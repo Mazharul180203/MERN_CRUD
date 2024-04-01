@@ -126,6 +126,9 @@ export async function updateUser(req, res) {
     if (!userID || Object.keys(body).length === 0) {
       return res.status(400).send({ error: "Invalid request" });
     }
+    if(body.password){
+      body.password = await bcrypt.hash(body.password, 10);
+    }
     const updateResult = await userModel.updateOne({ _id: userID }, body);
 
     if (updateResult.matchedCount === 0) {
@@ -143,7 +146,7 @@ export async function updateUser(req, res) {
 }
 
 export async function generateOTP(req, res) {
-    //otpGenerator.generate(6)
+   let OTP = await otpGenerator.generate(6,{lowerCaseAlphabets:false, upperCaseAlphabets:false,specialChars:false});
 }
 export async function verifyOTP(req, res) {
   res.json("dfdfd");
