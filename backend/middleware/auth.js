@@ -17,3 +17,11 @@ export default (req, res, next) => {
         next();
     }
 };
+
+export function localVariables(req,res,next) {
+    req.app.locals = {
+        OTP : null,
+        resetSession : false
+    }
+    next();
+}

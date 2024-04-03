@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 
 import * as controller from '../controllers/appController.js'
-import Auth from '../middleware/auth.js'
+import Auth,{localVariables} from '../middleware/auth.js'
 
 
 //POST Method
@@ -16,7 +16,7 @@ router.route('/authenticate').post((req, res) => res.end());
 
 //GET Method
 router.route('/user/:username').get(controller.getUser)
-router.route('/generateOTP').get(controller.generateOTP)
+router.route('/generateOTP').get(controller.verifyUser,localVariables,controller.generateOTP)
 router.route('/verifyOTP').get(controller.verifyOTP)
 router.route('/creatResetSession').get(controller.createResetSession);
 
