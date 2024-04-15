@@ -108,7 +108,7 @@ export async function getUser(req, res) {
       // User not found
       return res.status(404).send({ error: "Couldn't find the user" });
     }
-     const {password , ...rest} = user.toJSON();//which valu is not pass to the api
+     const {password , ...rest} = user.toJSON();//which value is not pass to the api
     // User found, return it
     return res.status(200).send(rest);
   } catch (e) {
@@ -153,16 +153,34 @@ export async function verifyOTP(req, res) {
    const { code } = req.query;
    if(parseInt( req.app.locals.OTP ) === parseInt(code)){
      req.app.locals.OTP = null;
-     req.app.locals.resetSession = true;
+     req.app.locals.resetSession = true; // start session for reset password
      return res.status(201).send({ msg: "Verify OTP" })
    }
   return res.status(400).send({ msg: "Invalid OTP" })
 }
 
 export async function createResetSession(req, res) {
-  res.json("dfdfd");
+  if(req.app.locals.resetSession){
+    req.app.locals.resetSession = false; // allow to access this route only once
+    return res.status(201).send({ msg: "Access Granted" })
+  }
+  return res.status(201).send({ msg: "Session expired" })
 }
 
 export async function resetPassword(req, res) {
-    res.json("dfdfd");
+  if(!req.app.locals.resetSession) return res.status(404).send({ error: "Session Expired!" })
+  try {
+    const { username, password } = req.body;
+    const user = await userModel.findOne({ username });
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
+    }
+    const hashPassword = await bcrypt.hash(password, 10);
+    await userModel.updateOne({ username: user.username }, { password: hashPassword });
+    res.status(201).send({ msg: "Record Updated ..." });
+    req.app.locals.resetSession = false;
+  } catch (e) {
+    console.error(e); // It's good practice to log the error
+    res.status(500).send({ error: e.message || "An error occurred during the password reset process." });
+  }
 }

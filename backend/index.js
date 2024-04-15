@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/books", booksRoute);
-app.use("/auth",auth);
+app.use("/api",auth);
 
 mongoose
   .connect(MONGO_URL)
