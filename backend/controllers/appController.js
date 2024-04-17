@@ -97,7 +97,6 @@ export async function login(req, res) {
 
 export async function getUser(req, res) {
   const { username } = req.params;
-  // Ensure username is provided
   if (!username) {
     return res.status(400).send({ error: "Invalid Username" });
   }
@@ -109,7 +108,6 @@ export async function getUser(req, res) {
       return res.status(404).send({ error: "Couldn't find the user" });
     }
      const {password , ...rest} = user.toJSON();//which value is not pass to the api
-    // User found, return it
     return res.status(200).send(rest);
   } catch (e) {
     // Log the error or handle it as per your logging strategy
